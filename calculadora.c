@@ -20,55 +20,55 @@ void error();
 
 void main (void)
 {    
-    setup_oscillator(OSC_16MHZ);
-    #ifdef __DEBUG_SERIAL__ //Deberiamos de proteger nuestras depuraciones de esta forma o usar una macro ya protegida.
-        printf("Hola Mundo\n");//Puedes usar putc o printf. Revisa la documentación de CCS para ver que mas puedes hacer.
-    #endif
-    set_tris_d(0xff);
-    set_tris_c(0xff);
-    set_tris_b(0xf0);
-    set_tris_a(0x00);
-    set_tris_e(0x0);
-   
-    int8 numerouno = input_c();
-    int8 numerodos = input_d();
-    int16 resultado;
-    if(input(PIN_B7)==1)
+    while(TRUE)
     {
-        //sumas sucesivas y metodos de registros, dezplazamiento de registros
-        delay_ms(40);//evitar rebote
-        resultado = numerouno+numerodos;
-        resultado13bits(resultado);
-   } 
-   else if(input(PIN_B6)==1)
-   {
-       //sumas sucesivas y metodos de registros, dezplazamiento de registros
-       delay_ms(40);//evitar rebote
-       resultado = numerouno-numerodos;
-       resultado13bits(resultado);
-   }
-   else if(input(PIN_B5)==1)
-   {
-       delay_ms(40);
-       resultado=numerouno*numerodos;
-       if(resultado>4096)
-       {
-           error();
-       }
-   }
-   else if(input(PIN_B4)==1)
-   {
-        delay_ms(40);//rebote de botón
-        if(numerodos>0)
+        setup_oscillator(OSC_16MHZ);
+        #ifdef __DEBUG_SERIAL__ //Deberiamos de proteger nuestras depuraciones de esta forma o usar una macro ya protegida.
+             printf("Hola Mundo\n");//Puedes usar putc o printf. Revisa la documentación de CCS para ver que mas puedes hacer.
+        #endif
+        set_tris_d(0xff);
+        set_tris_c(0xff);
+        set_tris_b(0xf0);
+        set_tris_a(0x00);
+        set_tris_e(0x0);
+   
+        int8 numerouno = input_c();
+        int8 numerodos = input_d();
+        int16 resultado;
+    
+        if(input(PIN_B7)==1)
         {
-            resultado=numerouno/numerodos;
+            //sumas sucesivas y metodos de registros, dezplazamiento de registros
+            delay_ms(40);//evitar rebote
+            resultado = numerouno+numerodos;
+            resultado13bits(resultado);
+        } 
+        else if(input(PIN_B6)==1)
+        {
+            //sumas sucesivas y metodos de registros, dezplazamiento de registros
+            delay_ms(40);//evitar rebote
+            resultado = numerouno-numerodos;
             resultado13bits(resultado);
         }
-        else
+        else if(input(PIN_B5)==1)
         {
-            error();
+            delay_ms(40);
+            resultado=numerouno*numerodos;
         }
-   }
+        else if(input(PIN_B4)==1)
+        {
+            delay_ms(40);//rebote de botón
+            if(numerodos>0)
+            {
+                resultado=numerouno/numerodos;
+                resultado13bits(resultado);
+            }
+            else
+            {
+                error();
+            }
+        }
+    }
 }
 void resultado13bits (int16 resultado)
 {
