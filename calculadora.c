@@ -10,19 +10,18 @@
 void resultado13bits(int16 resultado);
 void error();
 
-
-void main (void)
-{    
      set_tris_d(0xff);
      set_tris_c(0xff);
      set_tris_b(0xf0);
      set_tris_a(0x00);
      set_tris_e(0x0);
-     
      int8 numero1;
      int8 numero2;
      int16 resultado=0;
      
+void main (void)
+{    
+
     while(TRUE)
     {
         int8 numero1 = input_c();
