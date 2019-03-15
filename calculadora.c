@@ -41,7 +41,8 @@ void main (void)
             {
                 error();
             }
-            resultado=numero1*numero2;
+            else
+               resultado=numero1*numero2;
         }
         else if(input(PIN_B4)==1)
         {
