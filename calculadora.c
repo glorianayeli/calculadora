@@ -5,27 +5,22 @@
 #use fast_io(a)
 #use fast_io(b) 
 #use fast_io(c) 
-#use fast_io(d)
-
-void resultado13bits(int16 resultado);
-void error();
-
+#use fast_io(d)    
+void error();  
+void main (void)
+{  
      set_tris_d(0xff);
      set_tris_c(0xff);
      set_tris_b(0xf0);
-     set_tris_a(0x00);
+     set_tris_a(0xC0);
      set_tris_e(0x0);
      int8 numero1;
      int8 numero2;
-     int16 resultado=0;
-     
-void main (void)
-{    
-
+     int16 resultado=0x00;
     while(TRUE)
     {
-        int8 numero1 = input_c();
-        int8 numero2 = input_d();
+        int16 numero1 = input_c();
+        int16 numero2 = input_d();
 
         if(input(PIN_B7)==1)
         {
@@ -41,8 +36,7 @@ void main (void)
             {
                 error();
             }
-            else
-               resultado=numero1*numero2;
+            resultado=numero1*numero2;
         }
         else if(input(PIN_B4)==1)
         {
@@ -55,14 +49,10 @@ void main (void)
                 error();
             }
         }
-        resultado13bits(resultado);
+        output_a(resultado);
+        output_b(resultado>>6);
+        output_e(resultado>>10);
     }
-}
-void resultado13bits (int16 resultado)
-{
-    output_a(resultado);
-    output_b(resultado>>6);
-    output_e(resultado>>10);
 }
 void error()
 {
@@ -73,4 +63,3 @@ void error()
         output_e(0b111);
     }
 }
-   
