@@ -13,7 +13,7 @@ void error();
      set_tris_d(0xff);
      set_tris_c(0xff);
      set_tris_b(0xf0);
-     set_tris_a(0x00);
+     set_tris_a(0xC0);
      set_tris_e(0x0);
      int8 numero1;
      int8 numero2;
@@ -29,11 +29,11 @@ void main (void)
 
         if(input(PIN_B7)==1)
         {
-            resultado = numero1+numero2;
+            resultado = (int16)numero1+numero2;
         } 
         else if(input(PIN_B6)==1)
         {
-            resultado = numero1-numero2;
+            resultado = (int16)numero1-numero2;
         }
         else if(input(PIN_B5)==1)
         {
@@ -42,13 +42,13 @@ void main (void)
                 error();
             }
             else
-               resultado=numero1*numero2;
+               resultado=(int16)numero1*numero2;
         }
         else if(input(PIN_B4)==1)
         {
             if(numero2>0)
             {
-                resultado=numero1/numero2;
+                resultado=(int16)numero1/numero2;
             }
             else
             {
