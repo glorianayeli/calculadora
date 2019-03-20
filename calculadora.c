@@ -19,8 +19,8 @@ void main (void)
      int16 resultado=0x00;
     while(TRUE)
     {
-        int16 numero1 = input_c();
-        int16 numero2 = input_d();
+        int8 numero1 = input_c();
+        int8 numero2 = input_d();
 
         if(input(PIN_B7)==1)
         {
